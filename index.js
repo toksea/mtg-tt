@@ -4,8 +4,12 @@
 var Deck = require('./lib/deck'),
     fs = require('fs'),
     argv = require('minimist')(process.argv.slice(2)),
-    deckFile = argv._[0];
+    deckFile = argv._[0],
+    opt = {
 
+      ignoreBasicLands: argv.b, // ignore basic lands
+
+    };
 
 // main
 var d = new Deck(deckFile);
