@@ -1,0 +1,41 @@
+4 Force of Will
+2 Misdirection
+3 Mental Misstep
+2 Flusterstorm
+2 Spell Pierce
+3 Lightning Bolt
+1 Fire // Ice
+1 Ancient Grudge
+1 Time Walk
+1 Ancestral Recall
+1 Mystical Tutor
+1 Ponder
+1 Brainstorm
+2 Preordain
+3 Gush
+3 Treasure Cruise
+4 Delver of Secrets
+4 Young Pyromancer
+3 Trygon Predator
+1 Vendilion Clique
+1 Island
+1 Black Lotus
+1 Mox Emerald
+1 Mox Ruby
+1 Mox Sapphire
+1 Flooded Strand
+1 Polluted Delta
+4 Scalding Tarn
+3 Tropical Island
+3 Volcanic Island
+
+
+1 Ancient Grudge
+3 Ingot Chewer
+1 Mountain
+2 Grim Lavamancer
+4 Grafdigger's Cage
+1 Ravenous Trap
+1 Echoing Truth
+1 Nature's Claim
+1 Red Elemental Blast

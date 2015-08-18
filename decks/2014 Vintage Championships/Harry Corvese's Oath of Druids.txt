@@ -1,0 +1,45 @@
+1 Mox Ruby
+1 Mox Jet
+1 Mox Sapphire
+1 Mox Pearl
+1 Mox Emerald
+1 Black Lotus
+1 Sol Ring
+4 Forbidden Orchard
+4 Misty Rainforest
+3 Underground Sea
+2 Tropical Island
+1 Strip Mine
+1 Library of Alexandria
+1 Island
+2 Griselbrand
+4 Oath of Druids
+1 Show and Tell
+1 Voltaic Key
+1 Time Vault
+1 Yawgmoth's Will
+1 Vampiric Tutor
+1 Demonic Tutor
+1 Ancestral Recall
+1 Time Walk
+1 Hurkyl's Recall
+1 Tezzeret the Seeker
+2 Abrupt Decay
+2 Thoughtseize
+4 Force of Will
+1 Misdirection
+1 Flusterstorm
+4 Mental Misstep
+1 Brainstorm
+1 Ponder
+3 Preordain
+2 Dig Through Time
+
+
+1 Abrupt Decay
+4 Nature's Claim
+4 Leyline of the Void
+2 Tormod's Crypt
+2 Duress
+1 Forest
+1 Toxic Deluge

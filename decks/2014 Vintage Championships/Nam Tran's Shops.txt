@@ -1,0 +1,32 @@
+4 Metalworker
+4 Lodestone Golem
+2 Steel Hellkite
+3 Wurmcoil Engine
+4 Phyrexian Revoker
+4 Tangle Wire
+4 Chalice of the Void
+4 Sphere of Resistance
+3 Staff of Domination
+2 Crucible of Worlds
+1 Mox Sapphire
+1 Mox Jet
+1 Mox Ruby
+1 Mox Emerald
+1 Mox Pearl
+1 Sol Ring
+1 Mana Crypt
+4 Wasteland
+4 Mishra's Workshop
+4 Mishra's Factory
+4 Ancient Tomb
+1 Strip Mine
+1 City of Traitors
+1 Tolarian Academy
+
+
+4 Grafdigger's Cage
+4 Leyline of Sanctity
+2 Duplicant
+2 Relic of Progenitus
+1 Trinisphère
+2 The Tabernacle at Pendrell Vale

@@ -1,0 +1,36 @@
+1 Black Lotus
+1 Mana Crypt
+1 Mox Emerald
+1 Mox Jet
+1 Mox Pearl
+1 Mox Ruby
+1 Mox Sapphire
+4 Chalice of the Void
+1 Sol Ring
+3 Sphere of Resistance
+4 Phyrexian Revoker
+4 Thorn of Amethyst
+1 Trinisphère
+4 Tangle Wire
+3 Phyrexian Metamorph
+4 Lodestone Golem
+4 Kuldotha Forgemaster
+1 Duplicant
+1 Steel Hellkite
+1 Sundering Titan
+1 Strip Mine
+1 Tolarian Academy
+4 Ancient Tomb
+4 Mishra's Factory
+4 Mishra's Workshop
+4 Wasteland
+
+
+1 Sphere of Resistance
+1 Duplicant
+3 Crucible of Worlds
+2 Dismember
+1 Ghost Quarter
+4 Tormod's Crypt
+1 Witchbane Orb
+2 Wurmcoil Engine
