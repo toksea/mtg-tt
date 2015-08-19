@@ -3,15 +3,15 @@
 
 * 卡牌通过 http://magiccards.info/ 查找
 * 默认下载中文图片
+* 下载后会生成 PDF
 * 牌表（decklist）可参见
   * [Event decks](http://mtgsalvation.gamepedia.com/Event_deck)
   * [Clash packs](http://mtgsalvation.gamepedia.com/Clash_pack)
 
 ## TODO
-* 增加牌价
+* 在 PDF 中打印牌表、牌价
 * 需要限制下载速度，以防被封
 * 支持不同语言输入、输出（图片）
 * 增加已有牌的数据库
 * 处理连体牌
   * [fire / ice](http://magiccards.info/query?q=fire+ice&v=card&s=cname)
-* 处理主牌、备牌都有同一牌的情况（若主备皆有 1 张某牌，现在只会下载 1 张）
