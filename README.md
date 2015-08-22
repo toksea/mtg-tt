@@ -9,9 +9,8 @@
   * [Clash packs](http://mtgsalvation.gamepedia.com/Clash_pack)
 
 ## TODO
-* 在 PDF 中打印牌表、牌价
+* 数据库记录牌价
 * 需要限制下载速度，以防被封
 * 支持不同语言输入、输出（图片）
-* 增加已有牌的数据库
-* 处理连体牌
+* 处理连体牌（如支持使用牌号）
   * [fire / ice](http://magiccards.info/query?q=fire+ice&v=card&s=cname)
