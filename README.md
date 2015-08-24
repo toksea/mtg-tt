@@ -21,7 +21,7 @@ node index.js my_deck.txt
   * [Event decks](http://mtgsalvation.gamepedia.com/Event_deck)
   * [Clash packs](http://mtgsalvation.gamepedia.com/Clash_pack)
 * 连体牌需使用其中一张的全名
-  * 如 Wear/Tear 需使用 [[http://magiccards.info/dgm/en/135b.html|Tear (Wear/Tear)]]
+  * 如 Wear/Tear 需使用 [Tear (Wear/Tear)](http://magiccards.info/dgm/en/135b.html)
 
 ## TODO
 * 记录牌价
