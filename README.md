@@ -24,7 +24,8 @@ node index.js my_deck.txt
   * 如 Wear/Tear 需使用 [[http://magiccards.info/dgm/en/135b.html|Tear (Wear/Tear)]]
 
 ## TODO
-* 数据库记录牌价
-* 需要限制下载速度，以防被封
-* 支持不同语言输入、输出（图片）
-
+* 记录牌价
+* 牌表录入支持多语言
+* 支持输出目标语言的牌
+* 可选则按一比一 3x3（会加水印）、小尺寸 3x3 和 4x4 输出，供 A4 纸打印
+* 支持有选择的打印
