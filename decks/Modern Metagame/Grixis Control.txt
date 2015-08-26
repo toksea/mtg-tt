@@ -1,0 +1,38 @@
+4 Delver of Secrets
+2 Gurmag Angler
+4 Snapcaster Mage
+2 Young Pyromancer
+2 Tasigur, the Golden Fang
+4 Island
+1 Mountain
+1 Swamp
+1 Blood Crypt
+4 Polluted Delta
+4 Scalding Tarn
+2 Steam Vents
+1 Sulfur Falls
+1 Watery Grave
+1 Electrolyze
+1 Go for the Throat
+2 Kolaghan's Command
+4 Lightning Bolt
+3 Remand
+1 Spell Pierce
+2 Spell Snare
+1 Terminate
+4 Thought Scour
+4 Gitaxian Probe
+4 Serum Visions
+
+2 Dragon's Claw
+1 Izzet Staticaster
+1 Blood Moon
+2 Dispel
+1 Flashfreeze
+1 Negate
+1 Rakdos Charm
+2 Rending Volley
+1 Tribute to Hunger
+1 Dreadbore
+1 Vandalblast
+1 Bitterblossom

@@ -1,0 +1,32 @@
+4 Ashiok, Nightmare Weaver
+4 Jace, Vryn's Prodigy
+1 Prognostic Sphinx
+1 Crux of Fate
+2 Languish
+4 Thoughtseize
+2 Bile Blight
+4 Dig Through Time
+4 Dissolve
+4 Hero's Downfall
+1 Negate
+2 Ultimate Price
+1 Perilous Vault
+2 Bloodstained Mire
+4 Dismal Backwater
+1 Flooded Strand
+5 Island
+4 Polluted Delta
+5 Swamp
+4 Temple of Deceit
+1 Urborg, Tomb of Yawgmoth
+
+1 Languish
+1 Negate
+1 Annul
+1 Disdainful Stroke
+2 Duress
+1 Orbs of Warding
+4 Pharika's Cure
+2 Tasigur, the Golden Fang
+1 Treasure Cruise
+1 Ugin, the Spirit Dragon

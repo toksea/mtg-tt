@@ -1,0 +1,40 @@
+3 Deceiver Exarch
+2 Pestermite
+4 Snapcaster Mage
+2 Tasigur, the Golden Fang
+1 Vendilion Clique
+4 Island
+1 Mountain
+1 Swamp
+1 Blood Crypt
+2 Bloodstained Mire
+1 Desolate Lighthouse
+4 Polluted Delta
+3 Scalding Tarn
+2 Steam Vents
+2 Sulfur Falls
+1 Tectonic Edge
+2 Watery Grave
+3 Splinter Twin
+2 Cryptic Command
+1 Dismember
+1 Dispel
+1 Kolaghan's Command
+4 Lightning Bolt
+4 Remand
+2 Spell Snare
+2 Terminate
+4 Serum Visions
+
+1 Engineered Explosives
+1 Nihil Spellbomb
+1 Spellskite
+1 Grim Lavamancer
+1 Izzet Staticaster
+2 Blood Moon
+2 Dispel
+1 Kolaghan's Command
+1 Negate
+1 Keranos, God of Storms
+1 Jace, Architect of Thought
+2 Anger of the Gods
