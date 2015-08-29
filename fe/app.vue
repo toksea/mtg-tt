@@ -8,7 +8,7 @@
 
     <div id="menu">
       <div class="pure-menu">
-        <a class="pure-menu-heading" href="#">Company</a>
+        <a class="pure-menu-heading" href="#">mtg-tt</a>
 
         <ul class="pure-menu-list">
           <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
@@ -25,27 +25,56 @@
 
     <div id="main">
 
+      <!--
       <div class="header">
         <h1>mtg-tt</h1>
         <h2>A subtitle for your page goes here</h2>
       </div>
-
+      !-->
       <div class="content">
-        <p>
-        <form>
-          <textarea></textarea>
-          <select name="lang">
-            <option value="cn">中文</option>
-            <option value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="es">Español</option>
-          </select>
-          <input name="layout" type="radio">3x3
-          <input name="layout" type="radio">4x4
-          <input name="submit" type="submit" value="下载">
+
+        <form class="pure-g pure-form pure-form-stacked">
+
+          <div class="pure-u-3-5">
+
+          <fieldset class="pure-group">
+            <input type="text" class="pure-input-1" placeholder="A title">
+            <textarea class="pure-input-1" placeholder="Textareas work too"
+                      rows="20"></textarea>
+          </fieldset>
+
+          </div>
+
+          <div class="pure-u-2-5">
+
+          <fieldset class="pure-group">
+
+            <label for="lang">语言</label>
+            <select id="lang" name="lang">
+              <option value="cn">中文</option>
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="es">Español</option>
+            </select>
+
+            <label>版式</label>
+            <label for="layout-3x3" class="pure-radio">
+              <input id="layout-3x3" type="radio"
+                     name="layout" value="3x3" checked>
+              3x3
+            </label>
+            <label for="layout-4x4" class="pure-radio">
+              <input id="layout-4x4" type="radio"
+                     name="layout" value="4x4">
+              4x4
+            </label>
+
+            <button type="submit" class="pure-button pure-button-primary">下载</button>
+          </fieldset>
+
+          </div>
         </form>
-        <p>
-      </div>
+
     </div>
 </template>
 
