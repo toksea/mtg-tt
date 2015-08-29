@@ -16,6 +16,8 @@
     "vue": "^0.12.12"
   },
   "devDependencies": {
+    "browser-sync": "^2.8.2",
+    "browser-sync-webpack-plugin": "^0.2.2",
     "css-loader": "^0.16.0",
     "style-loader": "^0.12.3",
     "vue-loader": "^3.0.3",

@@ -1,3 +1,5 @@
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+
 module.exports = {
   entry: "./fe/main.js",
   output: {
@@ -10,5 +12,12 @@ module.exports = {
       { test: /\.css$/, loader: "style!css" }
     ]
   },
-  devtool: '#source-map'
+  devtool: '#source-map',
+  plugins: [
+    new BrowserSyncPlugin({
+       host: 'localhost',
+       port: 3000,
+       server: { baseDir: ['.'] }
+    })
+  ]
 }
