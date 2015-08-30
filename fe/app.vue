@@ -33,15 +33,16 @@
       !-->
       <div class="content">
 
-        <form id="deck-form" class="pure-g pure-form pure-form-stacked">
+        <form id="deck-form" class="pure-g pure-form pure-form-stacked"
+              v-on="submit: submit">
 
           <div class="pure-u-3-5">
 
           <fieldset class="pure-group">
             <input type="text" class="pure-input-1" placeholder="标题"
-                   v-model="title" lazy>
+                   v-model="title" required lazy>
             <textarea class="pure-input-1" placeholder="牌表"
-                      rows="20" v-model="list" lazy></textarea>
+                      rows="20" v-model="list" required lazy></textarea>
           </fieldset>
 
           {{inputLang}}
@@ -68,8 +69,7 @@
               4x4
             </label>
 
-            <button type="submit" class="pure-button pure-button-primary"
-		    v-on="click: submit($event)">下载</button>
+            <button type="submit" class="pure-button pure-button-primary">下载</button>
           </fieldset>
 
           </div>
@@ -77,9 +77,10 @@
 
     </div>
 </template>
-
 <script>
-var guessLanguage = require('guesslanguage').guessLanguage;
+var guessLanguage = require('guesslanguage').guessLanguage,
+    request = require('superagent');
+
 
 module.exports = {
     el: '#app',
@@ -97,12 +98,24 @@ module.exports = {
         inputLang: ''
     },
     methods: {
-	submit: function(e) {
-	    // @todo 不阻止好像也行
-	    e.stopPropagation();
+        submit: function(e) {
+            // @todo 不阻止好像也行
+            e.preventDefault();
 
-	    console.log('hehe');
-	}
+            var data = this.$data;
+            console.log(data);
+            request
+               .post('/print')
+               .send(data)
+               .end(function(err, res) {
+                   if (res.ok) {
+                       alert('yay got ' + JSON.stringify(res.body));
+                   } else {
+                       alert('Oh no! error ' + res.text);
+                   }
+               });
+
+        }
     },
     watch: {
         'list': function(value) {

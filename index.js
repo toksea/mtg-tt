@@ -12,6 +12,6 @@ var Deck = require('./lib/deck'),
     };
 
 // main
-var d = new Deck(deckFile);
+var d = new Deck({file: deckFile});
 
 d.downloadImgs();

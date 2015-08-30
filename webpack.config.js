@@ -3,7 +3,7 @@ var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 module.exports = {
   entry: "./fe/main.js",
   output: {
-    path: './build',
+    path: './public',
     filename: "build.js"
   },
   module: {
