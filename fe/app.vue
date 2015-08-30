@@ -33,15 +33,18 @@
       !-->
       <div class="content">
 
-        <form class="pure-g pure-form pure-form-stacked">
+        <form id="deck-form" class="pure-g pure-form pure-form-stacked">
 
           <div class="pure-u-3-5">
 
           <fieldset class="pure-group">
-            <input type="text" class="pure-input-1" placeholder="A title">
-            <textarea class="pure-input-1" placeholder="Textareas work too"
-                      rows="20"></textarea>
+            <input type="text" class="pure-input-1" placeholder="标题"
+                   v-model="title" lazy>
+            <textarea class="pure-input-1" placeholder="牌表"
+                      rows="20" v-model="list" lazy></textarea>
           </fieldset>
+
+          {{inputLang}}
 
           </div>
 
@@ -50,26 +53,23 @@
           <fieldset class="pure-group">
 
             <label for="lang">语言</label>
-            <select id="lang" name="lang">
-              <option value="cn">中文</option>
-              <option value="en">English</option>
-              <option value="fr">Français</option>
-              <option value="es">Español</option>
+            <select id="lang" v-model="lang" options="langs">
             </select>
 
             <label>版式</label>
             <label for="layout-3x3" class="pure-radio">
               <input id="layout-3x3" type="radio"
-                     name="layout" value="3x3" checked>
+                     v-model="layout" name="layout" value="3x3" checked>
               3x3
             </label>
             <label for="layout-4x4" class="pure-radio">
               <input id="layout-4x4" type="radio"
-                     name="layout" value="4x4">
+                     v-model="layout" name="layout" value="4x4">
               4x4
             </label>
 
-            <button type="submit" class="pure-button pure-button-primary">下载</button>
+            <button type="submit" class="pure-button pure-button-primary"
+		    v-on="click: submit($event)">下载</button>
           </fieldset>
 
           </div>
@@ -79,9 +79,42 @@
 </template>
 
 <script>
-  module.exports = {
-  el: '#app',
-  }
+var guessLanguage = require('guesslanguage').guessLanguage;
+
+module.exports = {
+    el: '#app',
+    data: {
+        title:  null,
+        list:   null,
+        langs: [
+            {text: '中文', value: 'cn'},
+            {text: 'English', value: 'en'},
+            {text: 'Français', value: 'fr'},
+            {text: 'Español', value: 'es'}
+        ],
+        lang:   'cn',
+        layout: '3x3',
+        inputLang: ''
+    },
+    methods: {
+	submit: function(e) {
+	    // @todo 不阻止好像也行
+	    e.stopPropagation();
+
+	    console.log('hehe');
+	}
+    },
+    watch: {
+        'list': function(value) {
+            var self = this;
+
+            guessLanguage.detect(value, function(lang) {
+                console.log(lang);
+                self.inputLang = lang; // zh
+            });
+        }
+    }
+}
 </script>
 
 <style>
