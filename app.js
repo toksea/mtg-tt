@@ -14,7 +14,10 @@ var express = require('express'),
         }
     },
 
+    mkdirp = require('mkdirp'),
     BPromise = require('bluebird'),
+    moment = require('moment'),
+    fse = require('fs-extra'),
     debug = require('debug')('mtg'),
     Deck = require('./lib/deck');
 
@@ -28,6 +31,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 app.use(express.static('public', staticOptions));
+
+
 
 app.post('/print', function(req, res) {
 
@@ -47,7 +52,19 @@ app.post('/print', function(req, res) {
     d.downloadImgs()
     .then(function(ret) {
 
-        res.download(ret.file);
+        debug(ret);
+
+        // 把文件复制到可下载目录
+        var dlDir = './public/download',
+            dlFile = moment().format('YYYYMMDD_HHmmss') + '.pdf',
+            dlPath = dlDir + '/' + dlFile,
+            dlUrl = req.protocol + '://' + req.get('Host') + '/download/' + dlFile;
+
+        mkdirp.sync(dlDir);
+
+        fse.copySync(ret.file, dlPath);
+
+        res.json(dlUrl);
     })
 });
 
