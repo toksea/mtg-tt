@@ -13,7 +13,7 @@ var express = require('express'),
             res.set('x-timestamp', Date.now());
         }
     },
-    
+
     BPromise = require('bluebird'),
     debug = require('debug')('mtg'),
     Deck = require('./lib/deck');
@@ -33,21 +33,22 @@ app.post('/print', function(req, res) {
 
     debug(req.body);
     debug(typeof req.body);
-    
+
     var body = req.body;
-    
+
     debug(body);
 
     debug(body.title);
     debug(body.list);
-    
+
     var d = new Deck({title: body.title,
-		      list:  body.list});
+                      list:  body.list});
 
-    d.downloadImgs();
+    d.downloadImgs()
+    .then(function(ret) {
 
-
-    res.json('hehe');
+        res.download(ret.file);
+    })
 });
-    
+
 module.exports = app;

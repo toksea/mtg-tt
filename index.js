@@ -1,4 +1,4 @@
-// 通过 mtg 官网的 deck 语法，下载中文牌图片，以供打印、贴条
+!// 通过 mtg 官网的 deck 语法，下载中文牌图片，以供打印、贴条
 // 1 Honored Hierarch
 // 2 Topan Freeblade
 var Deck = require('./lib/deck'),
@@ -14,4 +14,7 @@ var Deck = require('./lib/deck'),
 // main
 var d = new Deck({file: deckFile});
 
-d.downloadImgs();
+d.downloadImgs()
+.then(function(ret) {
+    console.log(ret);
+});
