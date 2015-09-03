@@ -81,7 +81,7 @@
             </div>
             <div id="download" v-show="downloadStatus === 2">
                 若没有自动下载，请
-                <a href="{{downloadUrl}}" target="_blank"
+                <a id="download-pdf" href="{{downloadUrl}}" target="_blank"
                    class="pure-button pure-button-primary">点此下载</a>
             </div>
           </fieldset>
@@ -148,7 +148,21 @@ module.exports = {
                        var downloadUrl = res.body;
 
                        self.downloadUrl = downloadUrl;
-                       self.downloadStatus = 2;
+
+
+                       var downloadButton = document.getElementById('download-pdf');
+
+                       // mvvm 生效需要时间，生效后，再下载
+                       setTimeout(function() {
+
+                           // 显示下载按钮
+                           self.downloadStatus = 2;
+
+                           // 自动下载（需浏览器允许弹窗）
+                           downloadButton.click();
+
+                       }, 100);
+
                    } else {
                        alert('Oh no! error ' + res.text);
 
