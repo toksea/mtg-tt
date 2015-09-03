@@ -28,7 +28,7 @@
             </li>
             <li class="pure-menu-item menu-item-divided">
                 <a href="https://github.com/toksea/mtg-tt"
-		   target="_blank" class="pure-menu-link">
+                   target="_blank" class="pure-menu-link">
                     GitHub
                 </a>
             </li>
@@ -37,13 +37,12 @@
     </div>
 
     <div id="main">
-<!-- @todo only show on sm
 
-      <div class="header">
+      <div id="xs-header" class="header">
         <h1>mtg-tt</h1>
         <h2>A subtitle for your page goes here</h2>
       </div>
---!>
+
       <div class="content">
 
         <form id="deck-form" class="pure-g pure-form pure-form-stacked"
@@ -61,6 +60,7 @@
           </div>
           <!-- 大于 768px 时占 2/5，小于 768px 时占一行， -->
           <div class="pure-u-1 pure-u-sm-2-5 my-column">
+
 
           <fieldset class="pure-group">
 
@@ -430,6 +430,11 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     #layout.active .menu-link {
         left: 150px;
     }
+
+    #xs-header {
+        display: none;
+    }
+
 }
 
 @media (max-width: 48em) {
@@ -442,6 +447,10 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     #layout.active {
         position: relative;
         left: 150px;
+    }
+
+    #xs-header {
+        display: block;
     }
 }
 
