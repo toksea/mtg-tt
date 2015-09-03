@@ -8,18 +8,14 @@
 
     <div id="menu">
       <div class="pure-menu">
-        <a class="pure-menu-heading" href="#">mtg-tt</a>
+        <a class="pure-menu-heading" href="/">mtg-tt</a>
 
         <ul class="pure-menu-list">
-          <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
-          <li class="pure-menu-item"><a href="#" class="pure-menu-link">About</a></li>
-
-          <li class="pure-menu-item" class="menu-item-divided pure-menu-selected">
-            <a href="#" class="pure-menu-link">Services</a>
-          </li>
-
-          <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
-
+            <li class="pure-menu-item pure-menu-selected">
+                <a href="#" class="pure-menu-link">
+                    打印牌表
+                </a>
+            </li>
         </ul>
       </div>
     </div>
@@ -37,7 +33,7 @@
         <form id="deck-form" class="pure-g pure-form pure-form-stacked"
               v-on="submit: submit">
 
-          <div class="pure-u-3-5">
+          <div class="pure-u-1 pure-u-sm-3-5 my-column">
 
           <fieldset class="pure-group">
             <input type="text" class="pure-input-1" placeholder="标题"
@@ -49,8 +45,8 @@
           {{inputLang}}
 
           </div>
-
-          <div class="pure-u-2-5">
+          <!-- 大于 768px 时占 2/5，小于 768px 时占一行， -->
+          <div class="pure-u-1 pure-u-sm-2-5 my-column">
 
           <fieldset class="pure-group">
 
@@ -80,7 +76,7 @@
               <div class="sk-rect sk-rect5"></div>
             </div>
             <div id="download" v-show="downloadStatus === 2">
-                若没有自动下载，请
+                若未自动下载，请
                 <a id="download-pdf" href="{{downloadUrl}}" target="_blank"
                    class="pure-button pure-button-primary">点此下载</a>
             </div>
@@ -316,8 +312,7 @@ appears on the left side of the page.
     /*
     This styles the selected menu item `<li>`.
     */
-    #menu .pure-menu-selected,
-    #menu .pure-menu-heading {
+    #menu .pure-menu-selected {
         background: #1f8dd6;
     }
         /*
@@ -436,6 +431,15 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     }
 }
 
+/* http://purecss.io/grids/#applying-padding-and-borders-to-grid-units */
+    .pure-g > div {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .my-column {
+        padding: 1em;
+    }
 
 
 </style>
