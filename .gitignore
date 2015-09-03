@@ -1,5 +1,6 @@
 db
 cards
+/public/build*
 
 # Logs
 logs
