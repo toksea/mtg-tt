@@ -94,6 +94,8 @@
                 若未自动下载，请
                 <a id="download-pdf" href="{{downloadUrl}}" target="_blank"
                    class="pure-button pure-button-primary">点此下载</a>
+                <br>
+                <a href="/">下个别的</a>
             </div>
           </fieldset>
 
