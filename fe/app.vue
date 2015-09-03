@@ -16,18 +16,34 @@
                     打印牌表
                 </a>
             </li>
+            <li class="pure-menu-item">
+                <a href="#" class="pure-menu-link">
+                    最热牌表
+                </a>
+            </li>
+            <li class="pure-menu-item">
+                <a href="#" class="pure-menu-link">
+                    怎么用？
+                </a>
+            </li>
+            <li class="pure-menu-item menu-item-divided">
+                <a href="https://github.com/toksea/mtg-tt"
+		   target="_blank" class="pure-menu-link">
+                    GitHub
+                </a>
+            </li>
         </ul>
       </div>
     </div>
 
     <div id="main">
+<!-- @todo only show on sm
 
-      <!--
       <div class="header">
         <h1>mtg-tt</h1>
         <h2>A subtitle for your page goes here</h2>
       </div>
-      !-->
+--!>
       <div class="content">
 
         <form id="deck-form" class="pure-g pure-form pure-form-stacked"
@@ -35,12 +51,10 @@
 
           <div class="pure-u-1 pure-u-sm-3-5 my-column">
 
-          <fieldset class="pure-group">
             <input type="text" class="pure-input-1" placeholder="标题"
                    v-model="title" required lazy>
             <textarea class="pure-input-1" placeholder="牌表"
                       rows="20" v-model="list" required lazy></textarea>
-          </fieldset>
 
           {{inputLang}}
 
