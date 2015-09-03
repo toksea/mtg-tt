@@ -8,11 +8,13 @@
 
     <div id="menu">
       <div class="pure-menu">
-        <a class="pure-menu-heading" href="/">mtg-tt</a>
+        <a class="pure-menu-heading" href="/"
+           data-step="1" data-intro="这是一个用来下载万智牌贴条的工具">mtg-tt</a>
 
         <ul class="pure-menu-list">
             <li class="pure-menu-item pure-menu-selected">
-                <a href="#" class="pure-menu-link">
+                <a href="#" class="pure-menu-link" data-step="5"
+                data-intro="在这里还能下载流行牌表">
                     打印牌表
                 </a>
             </li>
@@ -22,13 +24,16 @@
                 </a>
             </li>
             <li class="pure-menu-item">
-                <a href="#" class="pure-menu-link">
+                <a href="#" class="pure-menu-link"
+                   v-on="click: showTut">
                     怎么用？
                 </a>
             </li>
             <li class="pure-menu-item menu-item-divided">
                 <a href="https://github.com/toksea/mtg-tt"
-                   target="_blank" class="pure-menu-link">
+                   target="_blank" class="pure-menu-link"
+                   data-step="6"
+                   data-intro="如果你是程序猿，欢迎在 GitHub 上交流">
                     GitHub
                 </a>
             </li>
@@ -51,9 +56,11 @@
           <div class="pure-u-1 pure-u-sm-3-5 my-column">
 
             <input type="text" class="pure-input-1" placeholder="标题"
-                   v-model="title" required lazy>
+                   v-model="title" data-step="2"
+                   data-intro="输入你的套牌名称" required lazy>
             <textarea class="pure-input-1" placeholder="牌表"
-                      rows="20" v-model="list" required lazy></textarea>
+                      rows="20" v-model="list" data-step="3"
+                      data-intro="再输入牌表" required lazy></textarea>
 
           {{inputLang}}
 
@@ -82,7 +89,9 @@
             </label>
 
             <button type="submit" v-show="downloadStatus === 0"
-                    class="pure-button pure-button-primary">下载</button>
+                    class="pure-button pure-button-primary" data-step="4"
+                    data-intro="点此就能下载了。下载需要 1 分钟左右，请耐心等待">
+                    下载</button>
             <div class="sk-wave my-loading"  v-show="downloadStatus === 1">
               <div class="sk-rect sk-rect1"></div>
               <div class="sk-rect sk-rect2"></div>
@@ -108,7 +117,10 @@
 var guessLanguage = require('guesslanguage').guessLanguage,
     request = require('superagent'),
     Spinner = require('spin.js'),
-    spinWave = require('spinkit/css/spinners/3-wave.css');
+    spinWave = require('spinkit/css/spinners/3-wave.css'),
+    introJs = require('intro.js/intro.js').introJs,
+    introJsCss = require('intro.js/introjs.css');
+
 
 module.exports = {
     el: '#app',
@@ -128,6 +140,13 @@ module.exports = {
         downloadUrl: '#'
     },
     methods: {
+        showTut: function(e) {
+            e.preventDefault();
+
+            // 需注意，data-step 不能按 10、20 命名
+            introJs().start();
+
+        },
         submit: function(e) {
             e.preventDefault();
 
