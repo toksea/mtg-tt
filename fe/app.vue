@@ -69,6 +69,7 @@
             </select>
 
             <label>版式</label>
+
             <label for="layout-3x3" class="pure-radio">
               <input id="layout-3x3" type="radio"
                      v-model="layout" name="layout" value="3x3" checked>
@@ -82,7 +83,7 @@
 
             <button type="submit" v-show="downloadStatus === 0"
                     class="pure-button pure-button-primary">下载</button>
-            <div class="sk-wave"  v-show="downloadStatus === 1">
+            <div class="sk-wave my-loading"  v-show="downloadStatus === 1">
               <div class="sk-rect sk-rect1"></div>
               <div class="sk-rect sk-rect2"></div>
               <div class="sk-rect sk-rect3"></div>
@@ -464,5 +465,8 @@ Hides the menu at `48em`, but modify this based on your app's needs.
         padding: 1em;
     }
 
+.my-loading {
+    margin: 0 !important;
+}
 
 </style>
