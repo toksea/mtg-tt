@@ -57,7 +57,7 @@
 
             <input type="text" class="pure-input-1" placeholder="标题"
                    v-model="title" data-step="2"
-                   data-intro="输入你的套牌名称" required lazy>
+                   data-intro="输入你的套牌名称" id="title-input" required lazy>
             <textarea class="pure-input-1" placeholder="牌表"
                       rows="20" v-model="list" data-step="3"
                       data-intro="再输入牌表" required lazy></textarea>
@@ -119,7 +119,10 @@ var guessLanguage = require('guesslanguage').guessLanguage,
     Spinner = require('spin.js'),
     spinWave = require('spinkit/css/spinners/3-wave.css'),
     introJs = require('intro.js/intro.js').introJs,
-    introJsCss = require('intro.js/introjs.css');
+    introJsCss = require('intro.js/introjs.css'),
+    introJsCssTheme = require('intro.js/themes/introjs-nassim.css'),
+    Shepherd = require('tether-shepherd'),
+    shepherdStyle = require('tether-shepherd/dist/css/shepherd-theme-default.css');
 
 
 module.exports = {
@@ -144,7 +147,28 @@ module.exports = {
             e.preventDefault();
 
             // 需注意，data-step 不能按 10、20 命名
-            introJs().start();
+            // introJs().start();
+
+            var tour = new Shepherd.Tour({
+                defaults: {
+                    classes: 'shepherd-theme-default',
+                    scrollTo: true
+                }
+            });
+
+            tour.addStep('example', {
+                title: 'Example Shepherd',
+                text: 'Creating a Shepherd is easy too! Just create ...',
+                attachTo: '.pure-menu-heading left'
+            });
+
+            tour.addStep('example', {
+                title: 'Example Shepherd',
+                text: 'Creating a Shepherd is easy too! Just create ...',
+                attachTo: '#title-input left'
+            });
+
+            tour.start();
 
         },
         submit: function(e) {
@@ -489,5 +513,4 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 .my-loading {
     margin: 0 !important;
 }
-
 </style>
