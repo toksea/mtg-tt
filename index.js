@@ -7,12 +7,16 @@ var Deck = require('./lib/deck'),
     deckFile = argv._[0],
     opt = {
 
-      ignoreBasicLands: argv.b, // ignore basic lands
+        ignoreBasicLands: argv.b, // ignore basic lands
 
     };
 
 // main
-var d = new Deck({file: deckFile});
+var d = new Deck({
+    file: deckFile,
+    inputLang: 'en',
+    destLang: 'cn',
+});
 
 d.downloadImgs()
 .then(function(ret) {

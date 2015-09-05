@@ -10,6 +10,7 @@
     "fs-extra": "^0.23.1",
     "guesslanguage": "^0.2.0",
     "intro.js": "^1.1.0",
+    "lodash": "^3.10.1",
     "minimist": "^1.1.3",
     "mkdirp": "^0.5.1",
     "moment": "^2.10.6",
