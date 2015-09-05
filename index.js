@@ -18,7 +18,12 @@ var d = new Deck({
     destLang: 'cn',
 });
 
-d.downloadImgs()
+// d.downloadImgs()
+// .then(function(ret) {
+//     console.log(ret);
+// });
+
+d.dlPdf()
 .then(function(ret) {
     console.log(ret);
 });
