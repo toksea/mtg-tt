@@ -15,7 +15,7 @@ var Deck = require('./lib/deck'),
 var d = new Deck({
     file: deckFile,
     inputLang: 'en',
-    destLang: 'cn',
+    destLang: 'fr',
 });
 
 // d.downloadImgs()
