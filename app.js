@@ -46,10 +46,19 @@ app.post('/print', function(req, res) {
     debug(body.title);
     debug(body.list);
 
-    var d = new Deck({title: body.title,
-                      list:  body.list});
+    var d = new Deck({
+        title: body.title,
+        list:  body.list,
+        inputLang: body.inputLang,
+        // @todo 确认 inputLang 在前端输入，还是后端自动检测
+        // 1. 用户输入较少时，无法正常检测出语言
+        // 2. 前端输入的话，可以在检测不出语言时，提示用户手动选择
 
-    d.downloadImgs()
+        // @todo lang detect 的语言要和 mtg 的语言 map
+        destLang: body.lang
+    });
+
+    d.dlPdf()
     .then(function(ret) {
 
         debug(ret);
