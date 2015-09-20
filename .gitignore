@@ -4,6 +4,8 @@ public/build*
 
 *.pdf
 
+/foo.txt
+
 
 # Logs
 logs
