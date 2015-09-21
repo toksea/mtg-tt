@@ -1,6 +1,11 @@
 db
 cards
-# /public/build*
+public/build*
+
+*.pdf
+
+/foo.txt
+
 
 # Logs
 logs

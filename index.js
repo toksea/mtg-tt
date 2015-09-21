@@ -14,11 +14,16 @@ var Deck = require('./lib/deck'),
 // main
 var d = new Deck({
     file: deckFile,
-    inputLang: 'en',
+    inputLang: 'cn',
     destLang: 'cn',
 });
 
-d.downloadImgs()
+// d.downloadImgs()
+// .then(function(ret) {
+//     console.log(ret);
+// });
+
+d.dlPdf()
 .then(function(ret) {
     console.log(ret);
 });
