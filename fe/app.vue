@@ -122,6 +122,8 @@ var guessLanguage = require('guesslanguage').guessLanguage,
     introJsCss = require('intro.js/introjs.css');
 
 
+
+
 module.exports = {
     el: '#app',
     data: {
@@ -170,6 +172,38 @@ module.exports = {
 
 
             var data = this.$data;
+
+            self.socket.emit('form submit', data);
+            self.socket.on('downloaded', function(data) {
+                if (data.ok) {
+
+                    // 自动下载，并显示“若未自动下载，点此下载”
+                    var downloadUrl = data.path;
+
+                    self.downloadUrl = downloadUrl;
+
+
+                    var downloadButton = document.getElementById('download-pdf');
+
+                    // mvvm 生效需要时间，生效后，再下载
+                    setTimeout(function() {
+
+                        // 显示下载按钮
+                        self.downloadStatus = 2;
+
+                        // 自动下载（需浏览器允许弹窗）
+                        downloadButton.click();
+
+                    }, 100);
+
+                } else {
+                    alert('Oh no! error ' + data.text);
+
+                    // self.downloadStatus = 0;
+                }
+            });
+
+            /*
             request
                .post('/print')
                .send(data)
@@ -201,6 +235,7 @@ module.exports = {
                        // self.downloadStatus = 0;
                    }
                });
+            */
 
         }
     },
@@ -213,6 +248,15 @@ module.exports = {
                 self.inputLang = lang; // zh
             });
         }
+    },
+    ready: function() {
+
+        var self = this;
+
+        // 如果更组件化，需要在组件间 share io，可参考：
+        // https://github.com/yyx990803/vue/issues/979
+        self.socket = require('socket.io-client')();
+
     }
 }
 </script>
