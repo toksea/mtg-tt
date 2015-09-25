@@ -136,6 +136,7 @@ io.on('connection', function(socket){
                 // res.json(dlUrl);
                 debug('downloaded', dlUrl);
                 socket.emit('downloaded', {
+                    did: body.did,
                     ok: true,
                     path: dlUrl
                 });

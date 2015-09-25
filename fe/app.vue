@@ -111,7 +111,16 @@
           </div>
         </form>
 
-    </div>
+        <ul>
+            <li
+                v-repeat="downloadList"
+                >
+                {{title}} {{url}}
+            </li>
+
+        </ul>
+
+      </div>
 </template>
 <script>
 var guessLanguage = require('guesslanguage').guessLanguage,
@@ -139,7 +148,8 @@ module.exports = {
         layout: '3x3',
         inputLang: '',
         downloadStatus: 0, // not download
-        downloadUrl: '#'
+        downloadUrl: '#',
+        downloadList: []
     },
     methods: {
         showTut: function(e) {
@@ -153,7 +163,7 @@ module.exports = {
             e.preventDefault();
 
             var self = this;
-            this.downloadStatus = 1; // downloading
+            // this.downloadStatus = 1; // downloading
 
             // 显示 spinner
             // @todo 换为 https://github.com/tobiasahlin/SpinKit
@@ -169,39 +179,26 @@ module.exports = {
             var spinner = new Spinner(spinnerOpts).spin(spinnerContainer);
             */
 
-
+            var did = Date.now();
 
             var data = this.$data;
 
-            self.socket.emit('form submit', data);
-            self.socket.on('downloaded', function(data) {
-                if (data.ok) {
+            data.did = did;
 
-                    // 自动下载，并显示“若未自动下载，点此下载”
-                    var downloadUrl = data.path;
+            // 明确定义的数据模型更加适合 Vue 的数据观察模式。建议在定义
+            // 组件时，在 data 选项中初始化所有需要进行动态观察的属性。
+            // http://cn.vuejs.org/guide/best-practices.html#数据初始化
 
-                    self.downloadUrl = downloadUrl;
+            console.log('pushing', this.downloadList);
 
-
-                    var downloadButton = document.getElementById('download-pdf');
-
-                    // mvvm 生效需要时间，生效后，再下载
-                    setTimeout(function() {
-
-                        // 显示下载按钮
-                        self.downloadStatus = 2;
-
-                        // 自动下载（需浏览器允许弹窗）
-                        downloadButton.click();
-
-                    }, 100);
-
-                } else {
-                    alert('Oh no! error ' + data.text);
-
-                    // self.downloadStatus = 0;
-                }
+            this.downloadList.push({
+                did: did,
+                title: data.title,
+                url: ""
             });
+
+            self.socket.emit('form submit', data);
+
 
             /*
             request
@@ -252,11 +249,58 @@ module.exports = {
     ready: function() {
 
         var self = this;
+        var i = 0;
+        var l = 0;
 
         // 如果更组件化，需要在组件间 share io，可参考：
         // https://github.com/yyx990803/vue/issues/979
         self.socket = require('socket.io-client')();
+        self.socket.on('downloaded', function(data) {
 
+            console.log('data', data);
+
+            if (data.ok) {
+
+                for (i = 0, l = self.downloadList.length; i < l; i += 1) {
+                    console.log(self.downloadList[i].did);
+                    console.log(self.downloadList[i].title);
+
+                    if (self.downloadList[i].did != data.did) {
+                        continue;
+                    }
+
+                    console.log('down');
+
+                // 自动下载，并显示“若未自动下载，点此下载”
+                var downloadUrl = data.path;
+
+                // self.downloadUrl = downloadUrl;
+
+                // var downloadButton = document.getElementById('download-pdf');
+
+                // mvvm 生效需要时间，生效后，再下载
+                    self.downloadList[i].url = downloadUrl;
+                    // self.downloadList[index].url = downloadUrl;
+                    // self.downloadList.push({
+                    //     title: downloadUrl,
+                    //     url: downloadUrl,
+                    // });
+
+                    // 显示下载按钮
+                    // self.downloadStatus = 2;
+
+                    // 自动下载（需浏览器允许弹窗）
+                    // downloadButton.click();
+
+                }
+
+
+            } else {
+                alert('Oh no! error ' + data.text);
+
+                // self.downloadStatus = 0;
+            }
+        });
     }
 }
 </script>
