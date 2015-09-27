@@ -113,9 +113,9 @@
 
         <ul>
             <li
-                v-repeat="downloadList"
+                v-repeat="dl in downloadList"
                 >
-                {{title}} <a target="_blank" href="{{url}}">下载</a>
+                {{dl.title}} {{dl.process}}% <a v-show="dl.url" href="{{dl.url}}">下载</a>
             </li>
 
         </ul>
@@ -192,11 +192,11 @@ module.exports = {
             this.downloadList.push({
                 did: did,
                 title: data.title,
+                process: 0,
                 url: ""
             });
 
             self.socket.emit('form submit', data);
-
 
             /*
             request
@@ -243,6 +243,22 @@ module.exports = {
         // 如果更组件化，需要在组件间 share io，可参考：
         // https://github.com/yyx990803/vue/issues/979
         self.socket = require('socket.io-client')();
+
+        // @todo 使用对象记录下载列表
+        self.socket.on('download process updated', function(data) {
+
+            for (i = 0, l = self.downloadList.length; i < l; i += 1) {
+                console.log(data);
+
+                if (self.downloadList[i].did != data.did) {
+                    continue;
+                }
+
+                self.downloadList[i].process = data.process;
+
+            }
+
+        });
         self.socket.on('downloaded', function(data) {
 
             console.log('data', data);
@@ -266,7 +282,8 @@ module.exports = {
 
                 // var downloadButton = document.getElementById('download-pdf');
 
-                // mvvm 生效需要时间，生效后，再下载
+                    // mvvm 生效需要时间，生效后，再下载
+                    self.downloadList[i].process = 100;
                     self.downloadList[i].url = downloadUrl;
                     // self.downloadList[index].url = downloadUrl;
                     // self.downloadList.push({

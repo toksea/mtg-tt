@@ -118,10 +118,19 @@ io.on('connection', function(socket){
             destLang: body.lang
         });
 
+        d.on('download process updated', (p) => {
+            debug('download process updated', p);
+
+            socket.emit('download process updated', {
+                did: body.did,
+                process: p
+            });
+        });
+
         d.init()
-	    .then(function() {
-		return d.dlPdf();
-	    })
+            .then(function() {
+                return d.dlPdf();
+            })
             .then(function(ret) {
 
                 debug(ret);
