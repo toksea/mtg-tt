@@ -62,8 +62,6 @@
                       rows="20" v-model="list" data-step="3"
                       data-intro="再输入牌表。支持中、英等所有出版过万智牌的语言。<br/>请按“数量空格名称”的格式输入，如“20 海岛”" required lazy></textarea>
 
-          {{inputLang}}
-
           </div>
           <!-- 大于 768px 时占 2/5，小于 768px 时占一行， -->
           <div class="pure-u-1 pure-u-sm-2-5 my-column">
@@ -117,7 +115,7 @@
             <li
                 v-repeat="downloadList"
                 >
-                {{title}} <a href="{{url}}">下载</a>
+                {{title}} <a target="_blank" href="{{url}}">下载</a>
             </li>
 
         </ul>
@@ -125,8 +123,7 @@
       </div>
 </template>
 <script>
-var guessLanguage = require('guesslanguage').guessLanguage,
-    request = require('superagent'),
+var request = require('superagent'),
     Spinner = require('spin.js'),
     spinWave = require('spinkit/css/spinners/3-wave.css'),
     introJs = require('intro.js/intro.js').introJs,
@@ -148,7 +145,6 @@ module.exports = {
         ],
         lang:   'cn',
         layout: '3x3',
-        inputLang: '',
         downloadStatus: 0, // not download
         downloadUrl: '#',
         downloadList: []
@@ -163,13 +159,6 @@ module.exports = {
         },
         submit: function(e) {
             e.preventDefault();
-
-            // @todo 点 submit 时，先触发 submit 还是 watch list？
-            // 即，此处是否需要手动触发一次 watch list 所做的语言检测？
-            if (!this.inputLang) {
-                alert('no');
-                return;
-            }
 
             var self = this;
             // this.downloadStatus = 1; // downloading
@@ -243,47 +232,6 @@ module.exports = {
                });
             */
 
-        }
-    },
-    watch: {
-        'list': function(value) {
-            var self = this;
-
-            guessLanguage.detect(value, function(lang) {
-
-                console.log(lang);
-
-                var langMapping = {
-                    'zh':    'cn',
-                    'zh-TW': 'tw',
-                    'ja':    'jp'
-                };
-                if (langMapping.hasOwnProperty(lang)) {
-                    lang = langMapping[lang];
-                }
-
-
-                var avalLangs = [
-                    'en',       // en
-                    'de',       // de
-                    'fr',       // fr
-                    'it',       // it
-                    'es',       // es
-                    'pt',       // pt
-                    'ru',       // ru
-                    'ko',       // ko
-                    'jp',       // ja
-                    'cn',       // zh
-                    'tw'        // zh-TW guessLanguage.js 猜不出来
-                ];
-                if (avalLangs.indexOf(lang) < 0) {
-                    // @todo 处理未知 lang
-                    return;
-                }
-
-
-                self.inputLang = lang; // zh
-            });
         }
     },
     ready: function() {
