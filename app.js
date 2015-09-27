@@ -109,7 +109,7 @@ io.on('connection', function(socket){
         var d = new Deck({
             title: body.title,
             list:  body.list,
-            inputLang: body.inputLang,
+            // inputLang: body.inputLang,
             // @todo 确认 inputLang 在前端输入，还是后端自动检测
             // 1. 用户输入较少时，无法正常检测出语言
             // 2. 前端输入的话，可以在检测不出语言时，提示用户手动选择
@@ -118,7 +118,10 @@ io.on('connection', function(socket){
             destLang: body.lang
         });
 
-        d.dlPdf()
+        d.init()
+	    .then(function() {
+		return d.dlPdf();
+	    })
             .then(function(ret) {
 
                 debug(ret);

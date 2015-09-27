@@ -23,7 +23,10 @@ var d = new Deck({
 //     console.log(ret);
 // });
 
-d.dlPdf()
+d.init()
+.then(function() {
+    return d.dlPdf();
+})
 .then(function(ret) {
     console.log(ret);
 });

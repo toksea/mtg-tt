@@ -117,7 +117,7 @@
             <li
                 v-repeat="downloadList"
                 >
-                {{title}} {{url}}
+                {{title}} <a href="{{url}}">下载</a>
             </li>
 
         </ul>
