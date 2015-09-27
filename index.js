@@ -1,3 +1,5 @@
+'use strict';
+
 // 通过 mtg 官网的 deck 语法，下载中文牌图片，以供打印、贴条
 // 1 Honored Hierarch
 // 2 Topan Freeblade
@@ -14,7 +16,6 @@ var Deck = require('./lib/deck'),
 // main
 var d = new Deck({
     file: deckFile,
-    inputLang: 'cn',
     destLang: 'cn',
 });
 
@@ -23,7 +24,14 @@ var d = new Deck({
 //     console.log(ret);
 // });
 
-d.dlPdf()
+d.on('download process updated', (p) => {
+    console.log('download process updated', p);
+});
+
+d.init()
+.then(function() {
+    return d.dlPdf();
+})
 .then(function(ret) {
     console.log(ret);
 });

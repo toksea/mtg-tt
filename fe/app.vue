@@ -13,14 +13,14 @@
 
         <ul class="pure-menu-list">
             <li class="pure-menu-item pure-menu-selected">
-                <a href="#" class="pure-menu-link" data-step="5"
-                data-intro="在这里还能下载流行牌表">
+                <a href="#" class="pure-menu-link">
                     打印牌表
                 </a>
             </li>
             <li class="pure-menu-item">
-                <a href="#" class="pure-menu-link">
-                    最热牌表
+                <a href="#" class="pure-menu-link" data-step="5"
+                data-intro="在这里还能下载流行牌表">
+                    流行牌表
                 </a>
             </li>
             <li class="pure-menu-item">
@@ -60,9 +60,7 @@
                    data-intro="输入你的套牌名称" required lazy>
             <textarea class="pure-input-1" placeholder="牌表"
                       rows="20" v-model="list" data-step="3"
-                      data-intro="再输入牌表" required lazy></textarea>
-
-          {{inputLang}}
+                      data-intro="再输入牌表。支持中、英等所有出版过万智牌的语言。<br/>请按“数量空格名称”的格式输入，如“20 海岛”" required lazy></textarea>
 
           </div>
           <!-- 大于 768px 时占 2/5，小于 768px 时占一行， -->
@@ -71,10 +69,11 @@
 
           <fieldset class="pure-group">
 
-            <label for="lang">语言</label>
+            <label for="lang">下载什么语言的牌？</label>
             <select id="lang" v-model="lang" options="langs">
             </select>
 
+            <!--
             <label>版式</label>
 
             <label for="layout-3x3" class="pure-radio">
@@ -87,40 +86,31 @@
                      v-model="layout" name="layout" value="4x4">
               4x4
             </label>
+            --!>
 
-            <button type="submit" v-show="downloadStatus === 0"
+            <button type="submit"
                     class="pure-button pure-button-primary" data-step="4"
-                    data-intro="点此就能下载了。下载需要 1 分钟左右，请耐心等待">
+                    data-intro="点此就能下载 Pdf 了。生成 Pdf 需要 1 分钟左右，请耐心等待">
                     下载</button>
-            <div class="sk-wave my-loading"  v-show="downloadStatus === 1">
-              <div class="sk-rect sk-rect1"></div>
-              <div class="sk-rect sk-rect2"></div>
-              <div class="sk-rect sk-rect3"></div>
-              <div class="sk-rect sk-rect4"></div>
-              <div class="sk-rect sk-rect5"></div>
-            </div>
-            <div id="download" v-show="downloadStatus === 2">
-                若未自动下载，请
-                <a id="download-pdf" href="{{downloadUrl}}" target="_blank"
-                   class="pure-button pure-button-primary">点此下载</a>
-                <br>
-                <a href="/">下个别的</a>
-            </div>
           </fieldset>
 
           </div>
         </form>
 
-    </div>
+        <ul>
+            <li
+                v-repeat="dl in downloadList"
+                >
+                {{dl.title}} {{dl.process}}% <a v-show="dl.url" href="{{dl.url}}">下载</a>
+            </li>
+
+        </ul>
+
+      </div>
 </template>
 <script>
-var guessLanguage = require('guesslanguage').guessLanguage,
-    request = require('superagent'),
-    Spinner = require('spin.js'),
-    spinWave = require('spinkit/css/spinners/3-wave.css'),
-    introJs = require('intro.js/intro.js').introJs,
+var introJs = require('intro.js/intro.js').introJs,
     introJsCss = require('intro.js/introjs.css');
-
 
 module.exports = {
     el: '#app',
@@ -135,9 +125,8 @@ module.exports = {
         ],
         lang:   'cn',
         layout: '3x3',
-        inputLang: '',
-        downloadStatus: 0, // not download
-        downloadUrl: '#'
+        downloadUrl: '#',
+        downloadList: []
     },
     methods: {
         showTut: function(e) {
@@ -151,68 +140,92 @@ module.exports = {
             e.preventDefault();
 
             var self = this;
-            this.downloadStatus = 1; // downloading
 
-            // 显示 spinner
-            // @todo 换为 https://github.com/tobiasahlin/SpinKit
-            /*
-            var spinnerContainer = document.getElementById('spinner');
-            var spinnerOpts = {
-                color:'#ccc',
-                lines: 12,
-                position: 'relative', // Element positioning
-                left: 0,
-                top: 0
-            };
-            var spinner = new Spinner(spinnerOpts).spin(spinnerContainer);
-            */
-
-
+            var did = Date.now();
 
             var data = this.$data;
-            request
-               .post('/print')
-               .send(data)
-               .end(function(err, res) {
-                   if (res.ok) {
 
-                       // 自动下载，并显示“若未自动下载，点此下载”
-                       var downloadUrl = res.body;
+            data.did = did;
 
-                       self.downloadUrl = downloadUrl;
+            // 明确定义的数据模型更加适合 Vue 的数据观察模式。建议在定义
+            // 组件时，在 data 选项中初始化所有需要进行动态观察的属性。
+            // http://cn.vuejs.org/guide/best-practices.html#数据初始化
 
+            console.log('pushing', this.downloadList);
 
-                       var downloadButton = document.getElementById('download-pdf');
+            this.downloadList.push({
+                did: did,
+                title: data.title,
+                process: 0,
+                url: ""
+            });
 
-                       // mvvm 生效需要时间，生效后，再下载
-                       setTimeout(function() {
-
-                           // 显示下载按钮
-                           self.downloadStatus = 2;
-
-                           // 自动下载（需浏览器允许弹窗）
-                           downloadButton.click();
-
-                       }, 100);
-
-                   } else {
-                       alert('Oh no! error ' + res.text);
-
-                       // self.downloadStatus = 0;
-                   }
-               });
+            self.socket.emit('form submit', data);
 
         }
     },
-    watch: {
-        'list': function(value) {
-            var self = this;
+    ready: function() {
 
-            guessLanguage.detect(value, function(lang) {
-                console.log(lang);
-                self.inputLang = lang; // zh
-            });
-        }
+        var self = this;
+        var i = 0;
+        var l = 0;
+
+        // 如果更组件化，需要在组件间 share io，可参考：
+        // https://github.com/yyx990803/vue/issues/979
+        self.socket = require('socket.io-client')();
+
+        // @todo 使用对象记录下载列表
+        self.socket.on('download process updated', function(data) {
+
+            for (i = 0, l = self.downloadList.length; i < l; i += 1) {
+                console.log(data);
+
+                if (self.downloadList[i].did != data.did) {
+                    continue;
+                }
+
+                self.downloadList[i].process = data.process;
+
+            }
+
+        });
+        self.socket.on('downloaded', function(data) {
+
+            console.log('data', data);
+
+            if (data.ok) {
+
+                for (i = 0, l = self.downloadList.length; i < l; i += 1) {
+                    console.log(self.downloadList[i].did);
+                    console.log(self.downloadList[i].title);
+
+                    if (self.downloadList[i].did != data.did) {
+                        continue;
+                    }
+
+                    console.log('down');
+
+                // 自动下载，并显示“若未自动下载，点此下载”
+                var downloadUrl = data.path;
+
+                // self.downloadUrl = downloadUrl;
+
+                // var downloadButton = document.getElementById('download-pdf');
+
+                    // mvvm 生效需要时间，生效后，再下载
+                    self.downloadList[i].process = 100;
+                    self.downloadList[i].url = downloadUrl;
+
+                    // @todo 自动下载（需浏览器允许弹窗）
+                    // downloadButton.click();
+
+                }
+
+
+            } else {
+                alert('Oh no! error ' + data.text);
+            }
+        });
     }
 }
 </script>
@@ -485,9 +498,5 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     .my-column {
         padding: 1em;
     }
-
-.my-loading {
-    margin: 0 !important;
-}
 
 </style>
