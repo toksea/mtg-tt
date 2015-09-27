@@ -24,8 +24,6 @@ node index.js my_deck.txt
   * 如 Wear/Tear 需使用 [Tear (Wear/Tear)](http://magiccards.info/dgm/en/135b.html)
 
 ## TODO
-* 好像有如果有没查到的牌，就不生成 pdf 的问题
-* 大小写问题，应该都按小写存
 * FE 语言与 BE 语言 map 的问题：zh -> cn
 * FE 识别出其他语言的处理：比如 unknown，另外，输入简体中文分别出现过 tl、sk
 * 记录牌价

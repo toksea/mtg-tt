@@ -13,14 +13,14 @@
 
         <ul class="pure-menu-list">
             <li class="pure-menu-item pure-menu-selected">
-                <a href="#" class="pure-menu-link" data-step="5"
-                data-intro="在这里还能下载流行牌表">
+                <a href="#" class="pure-menu-link">
                     打印牌表
                 </a>
             </li>
             <li class="pure-menu-item">
-                <a href="#" class="pure-menu-link">
-                    最热牌表
+                <a href="#" class="pure-menu-link" data-step="5"
+                data-intro="在这里还能下载流行牌表">
+                    流行牌表
                 </a>
             </li>
             <li class="pure-menu-item">
@@ -60,7 +60,7 @@
                    data-intro="输入你的套牌名称" required lazy>
             <textarea class="pure-input-1" placeholder="牌表"
                       rows="20" v-model="list" data-step="3"
-                      data-intro="再输入牌表" required lazy></textarea>
+                      data-intro="再输入牌表。支持中、英等所有出版过万智牌的语言。<br/>请按“数量空格名称”的格式输入，如“20 海岛”" required lazy></textarea>
 
           {{inputLang}}
 
@@ -71,10 +71,11 @@
 
           <fieldset class="pure-group">
 
-            <label for="lang">语言</label>
+            <label for="lang">下载什么语言的牌？</label>
             <select id="lang" v-model="lang" options="langs">
             </select>
 
+            <!--
             <label>版式</label>
 
             <label for="layout-3x3" class="pure-radio">
@@ -87,10 +88,11 @@
                      v-model="layout" name="layout" value="4x4">
               4x4
             </label>
+            --!>
 
             <button type="submit" v-show="downloadStatus === 0"
                     class="pure-button pure-button-primary" data-step="4"
-                    data-intro="点此就能下载了。下载需要 1 分钟左右，请耐心等待">
+                    data-intro="点此就能下载 Pdf 了。生成 Pdf 需要 1 分钟左右，请耐心等待">
                     下载</button>
             <div class="sk-wave my-loading"  v-show="downloadStatus === 1">
               <div class="sk-rect sk-rect1"></div>
@@ -161,6 +163,13 @@ module.exports = {
         },
         submit: function(e) {
             e.preventDefault();
+
+            // @todo 点 submit 时，先触发 submit 还是 watch list？
+            // 即，此处是否需要手动触发一次 watch list 所做的语言检测？
+            if (!this.inputLang) {
+                alert('no');
+                return;
+            }
 
             var self = this;
             // this.downloadStatus = 1; // downloading
@@ -241,7 +250,38 @@ module.exports = {
             var self = this;
 
             guessLanguage.detect(value, function(lang) {
+
                 console.log(lang);
+
+                var langMapping = {
+                    'zh':    'cn',
+                    'zh-TW': 'tw',
+                    'ja':    'jp'
+                };
+                if (langMapping.hasOwnProperty(lang)) {
+                    lang = langMapping[lang];
+                }
+
+
+                var avalLangs = [
+                    'en',       // en
+                    'de',       // de
+                    'fr',       // fr
+                    'it',       // it
+                    'es',       // es
+                    'pt',       // pt
+                    'ru',       // ru
+                    'ko',       // ko
+                    'jp',       // ja
+                    'cn',       // zh
+                    'tw'        // zh-TW guessLanguage.js 猜不出来
+                ];
+                if (avalLangs.indexOf(lang) < 0) {
+                    // @todo 处理未知 lang
+                    return;
+                }
+
+
                 self.inputLang = lang; // zh
             });
         }

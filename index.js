@@ -14,7 +14,7 @@ var Deck = require('./lib/deck'),
 // main
 var d = new Deck({
     file: deckFile,
-    inputLang: 'cn',
+    inputLang: 'en',
     destLang: 'cn',
 });
 
