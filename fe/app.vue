@@ -88,24 +88,10 @@
             </label>
             --!>
 
-            <button type="submit" v-show="downloadStatus === 0"
+            <button type="submit"
                     class="pure-button pure-button-primary" data-step="4"
                     data-intro="点此就能下载 Pdf 了。生成 Pdf 需要 1 分钟左右，请耐心等待">
                     下载</button>
-            <div class="sk-wave my-loading"  v-show="downloadStatus === 1">
-              <div class="sk-rect sk-rect1"></div>
-              <div class="sk-rect sk-rect2"></div>
-              <div class="sk-rect sk-rect3"></div>
-              <div class="sk-rect sk-rect4"></div>
-              <div class="sk-rect sk-rect5"></div>
-            </div>
-            <div id="download" v-show="downloadStatus === 2">
-                若未自动下载，请
-                <a id="download-pdf" href="{{downloadUrl}}" target="_blank"
-                   class="pure-button pure-button-primary">点此下载</a>
-                <br>
-                <a href="/">下个别的</a>
-            </div>
           </fieldset>
 
           </div>
@@ -123,14 +109,8 @@
       </div>
 </template>
 <script>
-var request = require('superagent'),
-    Spinner = require('spin.js'),
-    spinWave = require('spinkit/css/spinners/3-wave.css'),
-    introJs = require('intro.js/intro.js').introJs,
+var introJs = require('intro.js/intro.js').introJs,
     introJsCss = require('intro.js/introjs.css');
-
-
-
 
 module.exports = {
     el: '#app',
@@ -145,7 +125,6 @@ module.exports = {
         ],
         lang:   'cn',
         layout: '3x3',
-        downloadStatus: 0, // not download
         downloadUrl: '#',
         downloadList: []
     },
@@ -161,21 +140,6 @@ module.exports = {
             e.preventDefault();
 
             var self = this;
-            // this.downloadStatus = 1; // downloading
-
-            // 显示 spinner
-            // @todo 换为 https://github.com/tobiasahlin/SpinKit
-            /*
-            var spinnerContainer = document.getElementById('spinner');
-            var spinnerOpts = {
-                color:'#ccc',
-                lines: 12,
-                position: 'relative', // Element positioning
-                left: 0,
-                top: 0
-            };
-            var spinner = new Spinner(spinnerOpts).spin(spinnerContainer);
-            */
 
             var did = Date.now();
 
@@ -197,40 +161,6 @@ module.exports = {
             });
 
             self.socket.emit('form submit', data);
-
-            /*
-            request
-               .post('/print')
-               .send(data)
-               .end(function(err, res) {
-                   if (res.ok) {
-
-                       // 自动下载，并显示“若未自动下载，点此下载”
-                       var downloadUrl = res.body;
-
-                       self.downloadUrl = downloadUrl;
-
-
-                       var downloadButton = document.getElementById('download-pdf');
-
-                       // mvvm 生效需要时间，生效后，再下载
-                       setTimeout(function() {
-
-                           // 显示下载按钮
-                           self.downloadStatus = 2;
-
-                           // 自动下载（需浏览器允许弹窗）
-                           downloadButton.click();
-
-                       }, 100);
-
-                   } else {
-                       alert('Oh no! error ' + res.text);
-
-                       // self.downloadStatus = 0;
-                   }
-               });
-            */
 
         }
     },
@@ -285,16 +215,8 @@ module.exports = {
                     // mvvm 生效需要时间，生效后，再下载
                     self.downloadList[i].process = 100;
                     self.downloadList[i].url = downloadUrl;
-                    // self.downloadList[index].url = downloadUrl;
-                    // self.downloadList.push({
-                    //     title: downloadUrl,
-                    //     url: downloadUrl,
-                    // });
 
-                    // 显示下载按钮
-                    // self.downloadStatus = 2;
-
-                    // 自动下载（需浏览器允许弹窗）
+                    // @todo 自动下载（需浏览器允许弹窗）
                     // downloadButton.click();
 
                 }
@@ -302,8 +224,6 @@ module.exports = {
 
             } else {
                 alert('Oh no! error ' + data.text);
-
-                // self.downloadStatus = 0;
             }
         });
     }
@@ -578,9 +498,5 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     .my-column {
         padding: 1em;
     }
-
-.my-loading {
-    margin: 0 !important;
-}
 
 </style>

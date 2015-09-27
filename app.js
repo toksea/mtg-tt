@@ -33,6 +33,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static('public', staticOptions));
 
+// 此接口已经不用了（除非还要提供 API），
+// 现在用 socket.io 做通信
 app.post('/print', function(req, res) {
 
     debug(req.body);
