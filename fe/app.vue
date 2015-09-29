@@ -101,7 +101,7 @@
             <li
                 v-repeat="dl in downloadList"
                 >
-                {{dl.title}} {{dl.process}}% <a v-show="dl.url" href="{{dl.url}}">下载</a>
+                {{dl.title}} {{dl.process}}% <a v-show="dl.url" target="_blank" href="{{dl.url}}">下载</a>
             </li>
 
         </ul>
