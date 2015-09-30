@@ -94,18 +94,16 @@
                     下载</button>
           </fieldset>
 
+          <ul>
+              <li
+                v-repeat="dl in downloadList"
+                v-transition="expand"
+              >
+                  {{dl.title}} {{dl.process}}% <a v-show="dl.url" target="_blank" href="{{dl.url}}">下载</a>
+              </li>
+          </ul>
           </div>
         </form>
-
-        <ul>
-            <li
-                v-repeat="dl in downloadList"
-                >
-                {{dl.title}} {{dl.process}}% <a v-show="dl.url" target="_blank" href="{{dl.url}}">下载</a>
-            </li>
-
-        </ul>
-
       </div>
 </template>
 <script>
@@ -161,6 +159,9 @@ module.exports = {
             });
 
             self.socket.emit('form submit', data);
+
+            this.$data.title = null;
+            this.$data.list = null;
 
         }
     },
@@ -499,4 +500,14 @@ Hides the menu at `48em`, but modify this based on your app's needs.
         padding: 1em;
     }
 
+/* 下载列表出现时的动画效果 */
+.expand-transition {
+  transition: all .3s ease;
+}
+.expand-enter, .expand-leave {
+  height: 0;
+  padding: 0 10px;
+  opacity: 0;
+  background: yellow;
+}
 </style>
