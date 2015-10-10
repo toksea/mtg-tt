@@ -119,7 +119,14 @@ module.exports = {
             {text: '中文', value: 'cn'},
             {text: 'English', value: 'en'},
             {text: 'Français', value: 'fr'},
-            {text: 'Español', value: 'es'}
+            {text: 'Español', value: 'es'},
+            {text: 'Deutsch', value: 'de'},
+            {text: 'Italiano', value: 'it'},
+            {text: 'Português', value: 'pt'},
+            {text: 'Русский', value: 'ru'},
+            {text: '한국어', value: 'ko'},
+            {text: '日本語', value: 'jp'},
+            {text: '正體', value: 'tw'}
         ],
         lang:   'cn',
         layout: '3x3',
